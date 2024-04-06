@@ -14,8 +14,12 @@ def predict():
     float_features = [float(x) for x in request.form.values()]
     features = [np.array(float_features)]
     prediction = model.predict(features)
+    if prediction == 1:
+        result = "Oops! You seem to have diabetes"
+    if prediction == 0:
+        result = "Nice! You don't have diabetes"
 
-    return render_template("index.html", prediction_text = "the result is {}".format(prediction))
+    return render_template("index.html", prediction_text = "the result is {}".format(result))
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
